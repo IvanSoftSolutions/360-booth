@@ -1,20 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+import Home from './screens/Home';
+import NewEvent from './screens/NewEvent';
+
+import CloseButton from './components/CloseButton';
+
+function HomeScreen({navigation}) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Home navigation={navigation} />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function CreateEvent({navigation}) {
+  return (
+    <NewEvent navigation={navigation} />
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen name="Create Event" component={CreateEvent}
+          options={({navigation}) => ({
+            headerBackVisible: false,
+            headerLeft: () => (
+              <CloseButton navigation={navigation} />
+            ),
+            headerBackTitleStyle: {
+              fontSize:30,
+            },
+            headerStyle: {
+              backgroundColor: "#D80303",
+            },
+            headerTintColor: "#D3D3D3",
+            headerTitleStyle: {
+              fontSize: 18,
+            }
+          })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
