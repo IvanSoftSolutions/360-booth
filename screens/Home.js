@@ -14,7 +14,7 @@ export default function Home({navigation}) {
             <TabNavigation navigation={navigation} />
             <View style={styles.newEventIcon} >    
                 <TouchableOpacity onPress={() => navigation.navigate('Create Event')} >
-                    <FontAwesomeIcon icon={faPlus} size={30} />
+                    <FontAwesomeIcon icon={faPlus} size={30} style={{color: "#D3D3D3"}} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -28,10 +28,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     newEventIcon: {
-        color: "#D3D3D3",
         width: 60,
         height: 60,
-        backgroundColor: 'red',
+        backgroundColor: '#D80303',
         borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center',
