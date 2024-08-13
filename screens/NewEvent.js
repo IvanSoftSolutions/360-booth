@@ -23,7 +23,7 @@ export default function NewEvent({navigation}) {
         />
         <View style={{
             position: 'absolute',
-            top: 38,
+            top: 53,
             left: 16,
             height: 5,
             width: '23%',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   textStep: {
     fontSize: 18,
     color: '#D3D3D3',
-    paddingTop: 10,
+    paddingTop: 25,
     paddingRight: 15,
     paddingBottom: 10,
     alignSelf: 'flex-end',
