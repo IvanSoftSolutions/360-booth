@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Text, FlatList, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Image, Text, TouchableOpacity, FlatList, StyleSheet, View, useWindowDimensions, Touchable } from 'react-native';
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
 
 import Separator from './Separator';
@@ -21,42 +21,59 @@ const data = [
   },
 ]
 
-
-const FirstRoute = () => (
+const FirstRoute = ({navigation}) => (
     <FlatList
       data={data}
       ItemSeparatorComponent={Separator}
       renderItem={({item}) => (
-        <View style={styles.eventContainer} >
+        <TouchableOpacity style={styles.eventContainer} 
+          onPress={() => navigation.navigate('Event')}
+        >
           <Image source={placeHolderImage} style={styles.image} />
           <View style={styles.infoContainer}>
             <Text style={styles.eventTitle}>{item.name}</Text>
             <Text style={styles.eventDate}>{item.date}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
 );
 
-const SecondRoute = () => (
+
+
+const SecondRoute = ({navigation}) => (
     <FlatList
       data={data}
+      ItemSeparatorComponent={Separator}
       renderItem={({item}) => (
-        <View style={styles.eventContainer} >
+        <TouchableOpacity style={styles.eventContainer} 
+          onPress={() => navigation.navigate('Event')}
+        >
           <Image source={placeHolderImage} style={styles.image} />
           <View style={styles.infoContainer}>
             <Text style={styles.eventTitle}>{item.name}</Text>
             <Text style={styles.eventDate}>{item.date}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
 );
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
+const RenderScene = ({ route, navigation }) => {
+  switch (route.key) {
+    case 'first':
+      return <FirstRoute />;
+    case 'second':
+      return <SecondRoute navigation={navigation} />;
+    default:
+      return null;
+  }
+};
+
+// const renderScene = SceneMap({
+//   first: FirstRoute,
+//   second: SecondRoute,
+// });
 
 const renderTabBar = props => (
   <TabBar 
@@ -68,7 +85,7 @@ const renderTabBar = props => (
   />
 );
 
-export default function TabNavigation() {
+export default function TabNavigation({navigation}) {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
@@ -82,7 +99,7 @@ export default function TabNavigation() {
       <TabView
         renderTabBar={renderTabBar}
         navigationState={{ index, routes }}
-        renderScene={renderScene}
+        renderScene={ (props) => <RenderScene {...props} navigation={navigation} route={props.route} />}
         onIndexChange={setIndex}
       />
     </View>

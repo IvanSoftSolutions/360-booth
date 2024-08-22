@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './screens/Home';
+import Event from './screens/Event';
 import NewEvent from './screens/NewEvent';
 import NewEvent2 from './screens/NewEvent2';
 import NewEvent3 from './screens/NewEvent3';
@@ -13,6 +14,12 @@ import CloseButton from './components/CloseButton';
 function HomeScreen({navigation}) {
   return (
     <Home navigation={navigation} />
+  );
+}
+
+function EventScreen({navigation}) {
+  return (
+    <Event navigation={navigation} />
   );
 }
 
@@ -51,6 +58,11 @@ export default function App() {
             headerShown: false
           }}
         />
+        <Stack.Screen name="Event" component={EventScreen}
+          options={{
+            headerShown: false
+          }}
+        />
         <Stack.Screen name="Create Event" component={CreateEvent}
           options={({navigation}) => ({
             headerBackVisible: false,
@@ -72,6 +84,7 @@ export default function App() {
         <Stack.Screen name="New Event 2" component={NewEvent_2}
           options={({navigation}) => ({
             headerBackVisible: false,
+            title: 'Create Event',
             headerLeft: () => (
               <CloseButton navigation={navigation} />
             ),
@@ -90,6 +103,7 @@ export default function App() {
         <Stack.Screen name="New Event 3" component={NewEvent_3}
           options={({navigation}) => ({
             headerBackVisible: false,
+            title: 'Create Event',
             headerLeft: () => (
               <CloseButton navigation={navigation} />
             ),
@@ -108,6 +122,7 @@ export default function App() {
         <Stack.Screen name="New Event 4" component={NewEvent_4}
           options={({navigation}) => ({
             headerBackVisible: false,
+            title: 'Create Event',
             headerLeft: () => (
               <CloseButton navigation={navigation} />
             ),

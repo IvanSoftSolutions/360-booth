@@ -10,7 +10,9 @@ const PlaceHolderImage = require("../assets/placeholderImage.png");
 export default function Home({navigation}) {
     return (
         <View style={styles.mainContainer}>
-            <OngoingEvent placeholderImageSource={PlaceHolderImage} />
+            {/* <TouchableOpacity onPress={() => navigation.navigate('Event')}> */}
+                <OngoingEvent placeholderImageSource={PlaceHolderImage} />
+            {/* </TouchableOpacity> */}
             <TabNavigation navigation={navigation} />
             <View style={styles.newEventIcon} >    
                 <TouchableOpacity onPress={() => navigation.navigate('Create Event')} >
